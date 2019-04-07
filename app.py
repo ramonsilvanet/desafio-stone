@@ -1,9 +1,14 @@
 #!flask/bin/python
 from flask import Flask, jsonify, abort, make_response, request
 from flask_httpauth import HTTPBasicAuth
+from itsdangerous import (TimedJSONWebSignatureSerializer
+                          as Serializer, BadSignature, SignatureExpired)
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+
+secure_key =  "4fa09868ca6e400ce5c9cf7a95872e17"
+auth_token = None
 
 tasks = [
     {
@@ -73,10 +78,17 @@ def update_task(task_id):
 # Authentication and Authorization
 @auth.verify_password
 def check_credentials_and_give_a_token(username, password):
+    
     if not username == 'stone' or not password == 'pagamentos':
         return False
     else:
         return True
+
+@app.route( '/todo/api/v1.0/token', methods=['GET'])
+def get_key():
+    auth_token =  Serializer(secure_key, expires_in = 600)
+    return jsonify({ 'token': auth_token.dumps({ 'id': "1" }).decode('ascii') })
+
 
 # Error Handlers
 @app.errorhandler(404)
