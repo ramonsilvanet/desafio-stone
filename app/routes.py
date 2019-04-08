@@ -6,13 +6,16 @@ from flask import Flask, jsonify, abort, make_response, request
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
 
+from app.workers import worker
 
 @app.route('/job', methods=['POST'])
 def create_job():
-    return jsonify({'message' : 'job created !'})
+    w = worker.Worker()
+    w.execute(5)
+    return jsonify({'message' : 'job {} created !'.format(w.id)})
 
-@app.route('/job/<str:job_id>', methods=['POST'])
-def create_job():
+@app.route('/job/<string:job_id>', methods=['POST'])
+def get_job():
     return jsonify({'message' : 'job created !'})
 
 
