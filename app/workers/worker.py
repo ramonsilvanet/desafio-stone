@@ -16,6 +16,9 @@ class Worker(Thread):
     def __calculate(n):
         if n < 2:
             return n
+
+        # atraso para simular tarefa demorada
+        time.sleep(1)
         
         return self.__calculate(self, n-1) + self.__calculate(self, n-2)
 
