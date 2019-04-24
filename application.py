@@ -2,7 +2,9 @@
 
 from itsdangerous import (TimedJSONWebSignatureSerializer
                           as Serializer, BadSignature, SignatureExpired)
-from app import app
+from app import create_app
+
+app = create_app()
 
 
 
