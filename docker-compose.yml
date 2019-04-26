@@ -1,0 +1,14 @@
+version: "3"
+services:
+  api:
+    container_name: api-server
+    build: .
+    ports: 
+      - "5000:5000"
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+  redis:
+    container_name: redis-server
+    image: redis:3-alpine
