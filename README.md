@@ -91,11 +91,14 @@ Ex.:
 Ao executar você receberá um json com as informações do __job__
 
 ex.: `{
-    "id": "bea8f139-54f5-4c20-b4f2-dc6be2ed3e2b",
-    "is_finished": false,
+    "created_at": "Mon, 29 Apr 2019 23:33:30 GMT",
+    "finished_at": "Mon, 29 Apr 2019 23:34:30 GMT",
+    "id": "874e74f7-1d1e-46fb-82af-33e03af73e16",
     "meta": {
-        "progress": 11.666666666666666,
+        "progress": 98.33333333333333,
         "seconds": 60
     },
-    "status": "started"
+    "result": null,
+    "started_at": "Mon, 29 Apr 2019 23:33:30 GMT",
+    "status": "finished"
 }`
