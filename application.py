@@ -5,3 +5,5 @@ from itsdangerous import (TimedJSONWebSignatureSerializer
 from app import create_app
 
 app = create_app()
+
+from app import auth, errors, jobs
