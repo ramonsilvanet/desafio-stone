@@ -3,6 +3,5 @@ FLASK_ENV=development
 SECURE_KEY=4fa09868ca6e400ce5c9cf7a95872e17
 
 SESSION_TIMEOUT=600
-
-CELERY_BROKER_URL=redis://localhost:6379
-CELERY_RESULT_BACKEND=redis://localhost:6379
+REDIS_URL=redis://redis-server:6379/0
+REDIS_QUEUE =bg-tasks

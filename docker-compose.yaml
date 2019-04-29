@@ -5,10 +5,13 @@ services:
     build: .
     ports: 
       - "5000:5000"
+      - "9181:9181"
     volumes:
-      - .:/code
+      - .:/code      
     depends_on:
-      - redis
+      - redis    
   redis:
     container_name: redis-server
     image: redis:3-alpine
+    ports: 
+      - "6379:6379"

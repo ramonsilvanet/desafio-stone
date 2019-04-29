@@ -1,15 +1,14 @@
+import os
 from flask import Flask
-from config import Config
 
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
+app = Flask(__name__)
 
-    # Blueprints da Aplicacao
-    from app.errors import bp as errors_bp
-    app.register_blueprint(errors_bp)
-    
-    from app.auth import bp as auth_bp
-    app.register_blueprint(auth_bp)
+#Configuracoes do app
+app.config.update(
+    SECURE_KEY = os.environ['SECURE_KEY'],
+    SESSION_TIMEOUT = int(os.environ['SESSION_TIMEOUT']),
+    REDIS_URL=os.environ['REDIS_URL'],
+    REDIS_QUEUE=os.environ['REDIS_QUEUE']
+)
 
-    return app
+from app import routes, errors, authentication
