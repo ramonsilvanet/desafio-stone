@@ -3,11 +3,18 @@ import rq
 from redis import Redis
 from rq import get_current_job
 from app import app
+from fakeredis import FakeStrictRedis
 
 #inicia a fila
-queue = rq.Queue(app.config["REDIS_QUEUE"], 
-        connection=Redis.from_url(app.config["REDIS_URL"]))
 
+
+if app.config['TESTING'] == 'True':
+    # Mockando o Servidor Redis
+    queue = rq.Queue(is_async=False, connection=FakeStrictRedis())
+else:
+    # Fila com Servidor Real
+    queue = rq.Queue(app.config["REDIS_QUEUE"], 
+            connection=Redis.from_url(app.config["REDIS_URL"]))
 
 avaliable_jobs = ['countdown', 'fibonacci']
 
@@ -35,14 +42,16 @@ def create_a_job(job_name, meta):
 def get_job_status(id):
     job = queue.fetch_job(id)
 
-    job_info = {
-        'id': job.get_id(),
-        'meta': job.meta,
-        'status': job.status,
-        'created_at': job.enqueued_at,       
-        'started_at': job.started_at,
-        'finished_at': job.ended_at,
-        'result': job.result
-    }
-
-    return job_info
+    if job is None:
+        return None
+    else:
+        return {
+            'id': job.get_id(),
+            'meta': job.meta,
+            'status': job.status,
+            'created_at': job.enqueued_at,       
+            'started_at': job.started_at,
+            'finished_at': job.ended_at,
+            'result': job.result
+        }
+        

@@ -103,3 +103,12 @@ ex.: `{
     "started_at": "Mon, 29 Apr 2019 23:33:30 GMT",
     "status": "finished"
 }`
+
+## Testes Unitários
+
+para rodar os testes unitários basta executar 
+
+`pytest  --cov=app --cov-report html`
+
+## Cobertura de Código
+![Cobertura de Codigo](coverage_report.png)

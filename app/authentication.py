@@ -18,7 +18,7 @@ def get_key():
 # Authentication and Authorization
 @auth.verify_password
 def check_credentials_and_give_a_token(username_or_token, password):
-    
+  
     valid = verify_token(username_or_token)
     if not valid :
         if not username_or_token == 'stone' or not password == 'pagamentos':

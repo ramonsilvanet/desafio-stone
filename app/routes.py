@@ -9,8 +9,6 @@ from app.errors import bad_request, error_response
 def create_job():
     data = request.get_json() or {}
 
-    print(data)
-
     if 'job_name' not in data:
         return bad_request("you must specify a job !!!")    
     else:
