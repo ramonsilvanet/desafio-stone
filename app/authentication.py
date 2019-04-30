@@ -13,7 +13,7 @@ auth_token = None
 @auth.login_required
 def get_key():    
     auth_token =  Serializer(app.config['SECURE_KEY'], expires_in=app.config['SESSION_TIMEOUT'])
-    return jsonify({ 'token': auth_token.dumps({"username": "stone pagamentos"}).decode('ascii')})
+    return jsonify({ 'token': auth_token.dumps({"username": "stone"}).decode('ascii')})
 
 # Authentication and Authorization
 @auth.verify_password
@@ -28,17 +28,14 @@ def check_credentials_and_give_a_token(username_or_token, password):
     else:
         return True
 
-
-def verify_token(token):
+def verify_token(token):    
     s = Serializer(app.config['SECURE_KEY'])
     try:
-        data = s.loads(token)
-        
-        if data['id'] == '1':
+        data = s.loads(token)        
+        if data['username'] == 'stone':
             return True
         else:
             return None
-
     except SignatureExpired:
         return None
     except BadSignature:
