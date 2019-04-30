@@ -69,7 +69,8 @@ O projeto é executando dentro de containers docker
 #### POST - /job
 * Criar um job para execução em segundo plano
 
-`curl -u <token_gerado>: -i -H "Accept: application/json" -X POST -d '{"job_name": "countdown", "meta": {"seconds": 60}}'  http://127.0.0.1:5000/job`
+`curl -u <token_autenticacao>: -i -X POST -H "Content-Type: application/json" -d '{"job_name":"countdown", "meta": {"seconds": "60"}}' http://127.0.0.1:5000/job
+`
 
 * __countdown__ é o nome do job que será executado
 * __meta__ é um dicionário com parametros que serão passados para o job. Nesse caso, ele contem a chave __seconds__ que é a quantidade de segundo que o contador deverá ser executado.

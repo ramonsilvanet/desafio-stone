@@ -13,7 +13,7 @@ COPY application.py boot.sh ./
 RUN chmod +x boot.sh
 
 ENV FLASK_APP=application.py
-ENV FLASK_ENV=development
+ENV FLASK_ENV=production
 
 ENV SECURE_KEY=4fa09868ca6e400ce5c9cf7a95872e17
 ENV SESSION_TIMEOUT=600
