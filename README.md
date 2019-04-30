@@ -108,7 +108,35 @@ ex.: `{
 
 para rodar os testes unitários basta executar 
 
-`pytest  --cov=app --cov-report html`
+primeiro ative o virtualenv
 
-## Cobertura de Código
+`source venv/bin/activate`
+
+Instale as dependências
+
+`pip install -r requirements.txt`
+
+Então execute os testes
+
+`py.test`
+
+
+## Relatório de Cobertura de Código
+
+Se quiser um relatório de cobertura
+
+`py.test --cov=app --cov-report html`
 ![Cobertura de Codigo](coverage_report.png)
+
+
+## Monitorar filas de processos em background
+
+1. Entrar no container
+
+`docker exec -it api-server /bin/sh`
+
+2. iniciar o serviço __rq-dashboard__
+
+`rq-dashboard -H $REDIS_SERVER`
+
+3. Acessar a url [http://localhost:9181](http://localhost:9181)
