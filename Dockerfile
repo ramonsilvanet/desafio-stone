@@ -4,6 +4,8 @@ RUN adduser -D bgtasks
 
 WORKDIR /home/bg-tasks
 
+RUN apk add --update gcc libc-dev fortify-headers linux-headers && rm -rf /var/cache/apk/*
+
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install gunicorn
