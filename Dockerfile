@@ -24,6 +24,7 @@ ENV REDIS_SERVER=redis-server
 ENV REDIS_PORT=6379/0
 ENV REDIS_URL=redis://${REDIS_SERVER}:${REDIS_PORT}}
 ENV REDIS_QUEUE=bg-tasks
+ENV TESTING=False
 
 RUN chown -R bgtasks:bgtasks ./
 USER bgtasks

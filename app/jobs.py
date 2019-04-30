@@ -19,15 +19,16 @@ else:
 avaliable_jobs = ['countdown', 'fibonacci']
 
 def countdown(seconds):
-    job = get_current_job()    
-    for i in range(seconds):
-        job.meta['progress'] = 100.0 * i / seconds
-        job.save_meta()        
-        time.sleep(1)
-    job.meta['progress'] = 100
-    job.save_meta()
-    return "Ok" # esse valor será colocar no job.result
-
+        job = get_current_job()    
+        seconds = int(seconds)
+        for i in range(seconds):
+            job.meta['progress'] = 100.0 * i / seconds
+            job.save_meta()        
+            time.sleep(1)
+        job.meta['progress'] = 100
+        job.save_meta()
+        return "Ok" # esse valor será colocar no job.result
+    
 def enqueue_job(job_name, meta):
     job = queue.enqueue(job_name, meta["seconds"], result_ttl=-1)
     job.meta = meta
